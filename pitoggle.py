@@ -52,16 +52,11 @@ def change_color():
     for light in lights:
         light.xy = [color1, color2]
 
-#prev_input = 0
-
 while True:
-    #take a reading
     toggle = GPIO.input(togglePin)
     bright = GPIO.input(brightPin)
     dim = GPIO.input(dimPin)
     colors = GPIO.input(colorPin)
-    #if the last reading was low and this one high, print
-    #if ((not prev_input) and toggle):
     if toggle == 0:
         print("toggling power!")
         toggle_lights()
@@ -74,8 +69,6 @@ while True:
     if colors == 0:
         print('new color')
         change_color()
-    #update previous input
-    #prev_input = input
     #pause to allow the switch to bounce back
     time.sleep(0.05)
 
