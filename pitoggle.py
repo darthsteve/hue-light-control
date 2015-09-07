@@ -19,34 +19,41 @@ GPIO.setup(colorPin, GPIO.IN, GPIO.PUD_UP)
 
 #use the IP of your bridge
 b = Bridge(bridgeIP)
+lights = b.get_light_objects()
 
 def toggle_lights():
-    lights = b.get_light_objects()
     on = False
     for light in lights:
         if light.on:
             on = True
-            light.brightness=254
-            #break
     if on:
         b.set_group(0,'on',False)
     else:
         b.set_group(0,'on',True)
 
 def bright_up():
-    lights = b.get_light_objects()
-    for light in lights:
-        if light.on and light.brightness<254:
-           light.brightness+=40
+    time.sleep(0.3)
+    bright = GPIO.input(brightPin)
+    if bright == 0:
+        for light in lights:
+            light.brightness=254
+    else:
+        for light in lights:
+            if light.on and light.brightness<254:
+                light.brightness+=40
 
 def dim_down():
-    lights = b.get_light_objects()
-    for light in lights:
-        if light.on and light.brightness>0:
-            light.brightness-=40
+    time.sleep(0.3)
+    dim = GPIO.input(dimPin)
+    if dim == 0:
+        for light in lights:
+            light.brightness=10
+    else:
+        for light in lights:
+            if light.on and light.brightness<254:
+                light.brightness+=40
 
 def change_color():
-    lights = b.get_light_objects()
     color1 = random.random()
     color2 = random.random()
     for light in lights:
