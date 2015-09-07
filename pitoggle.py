@@ -51,7 +51,7 @@ def dim_down():
     else:
         for light in lights:
             if light.on and light.brightness<254:
-                light.brightness+=40
+                light.brightness-=40
 
 def change_color():
     color1 = random.random()
