@@ -50,7 +50,7 @@ def dim_down():
             light.brightness=10
     else:
         for light in lights:
-            if light.on and light.brightness<254:
+            if light.on and light.brightness>0:
                 light.brightness-=40
 
 def change_color():
